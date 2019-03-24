@@ -2,12 +2,14 @@
 
 
 const koa = require('koa');
+const cors = require('koa-cors');
 const Router = require('./routes/index');
 const body_parser = require('koa-bodyparser');
 const koa_body = require('koa-body');
 const json = require('koa-json');
 const app = new koa();
 
+app.use(cors())
 app.use(koa_body());
 app.use(body_parser());
 app.use(json());
