@@ -11,15 +11,7 @@ const data = {
 
 }
 
-const data2 = {
-    name: "Valeria",
-    lastname: "Garcia",
-    company: "Nearsoft",
-    phone: 6621334455,
-    email: "vgarcia@nearsoft.com",
-}
-
-const api_url = `http://localhost:3001/api/contact`;
+const api_url = `http://localhost:3001/api/contact/5c97de042ce54f63ee5090cd`;
 
 
 class ContactList extends Component {
@@ -31,18 +23,39 @@ class ContactList extends Component {
         };
     }
 
+    getData = contact_data => {
+        const {_id} = contact_data._id;
+        const {name} = contact_data.name;
+        const {lastname} = contact_data.lastname;
+        const {company} = contact_data.company;
+        const {phone} = contact_data.phone;
+        const {email} = contact_data.email;
+
+        const data={
+            _id,
+            name,
+            lastname,
+            company,
+            phone,
+            email,
+        }
+
+        return data;
+    }
+
     showContactInformation = () => {
         fetch(api_url).then(resolve => {
-            console.log(resolve);
+            return resolve.json();
+        }).then( data => {
+
+            const seeContact = this.getData(data);
+            console.log(seeContact);
             debugger;
+            this.setState({
+                data: seeContact
+            })
         });
 
-        console.log("Informacion de Usuario");
-        this.setState({
-            data: data2,
-        });
-
-        console.log(data2.lastname);
     }
 
     render() {
@@ -50,7 +63,6 @@ class ContactList extends Component {
         return (
             <div>
                 <div>
-                    <h3> Contacts List</h3>
                     <button onClick={this.showContactInformation}> <ContactElement data={data}></ContactElement> </button>
                     <button onClick={this.showContactInformation}> <ContactElement data={data}></ContactElement> </button>
                     <button onClick={this.showContactInformation}> <ContactElement data={data}></ContactElement> </button>

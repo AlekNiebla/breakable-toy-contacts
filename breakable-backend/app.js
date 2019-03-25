@@ -11,7 +11,14 @@ const app = new koa();
 
 app.use(cors())
 app.use(koa_body());
-app.use(body_parser());
+app.use(body_parser({
+    enableTypes: ['json'],
+    jsonLimit: '5mb',
+    strict: true,
+    onerror: function (err, ctx) {
+        ctx.throw('body parse error',422)
+    }
+}));
 app.use(json());
 
 
