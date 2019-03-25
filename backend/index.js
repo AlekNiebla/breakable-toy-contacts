@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const app = require('./app');
 const config = require('./config');
 
-
+mongoose.set('useCreateIndex', true)
 mongoose.connect(config.db,(err, res)=>{
     if (err){
         console.log(`error al conectar a la base de datos ${err}`);

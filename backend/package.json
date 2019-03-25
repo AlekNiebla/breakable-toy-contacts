@@ -28,7 +28,8 @@
     "koa-static": "^5.0.0",
     "mongoose": "^5.4.19",
     "react": "^16.8.5",
-    "save": "^2.3.3"
+    "save": "^2.3.3",
+    "undefsafe": "^2.0.2"
   },
   "devDependencies": {
     "nodemon": "^1.18.10"

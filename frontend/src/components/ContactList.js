@@ -11,8 +11,6 @@ const data = {
 
 }
 
-const api_url = `http://localhost:3001/api/contact/5c97de042ce54f63ee5090cd`;
-
 
 class ContactList extends Component {
 
@@ -24,12 +22,7 @@ class ContactList extends Component {
     }
 
     getData = contact_data => {
-        const {_id} = contact_data._id;
-        const {name} = contact_data.name;
-        const {lastname} = contact_data.lastname;
-        const {company} = contact_data.company;
-        const {phone} = contact_data.phone;
-        const {email} = contact_data.email;
+        const {_id, name, lastname, company, phone, email} = contact_data;
 
         const data={
             _id,
@@ -43,14 +36,15 @@ class ContactList extends Component {
         return data;
     }
 
-    showContactInformation = () => {
+    showContactInformation = (id) => {
+        const api_url = `http://localhost:3001/api/contact/${id}`;
+
         fetch(api_url).then(resolve => {
             return resolve.json();
         }).then( data => {
 
             const seeContact = this.getData(data);
             console.log(seeContact);
-            debugger;
             this.setState({
                 data: seeContact
             })
@@ -63,11 +57,11 @@ class ContactList extends Component {
         return (
             <div>
                 <div>
-                    <button onClick={this.showContactInformation}> <ContactElement data={data}></ContactElement> </button>
-                    <button onClick={this.showContactInformation}> <ContactElement data={data}></ContactElement> </button>
-                    <button onClick={this.showContactInformation}> <ContactElement data={data}></ContactElement> </button>
-                    <button onClick={this.showContactInformation}> <ContactElement data={data}></ContactElement> </button>
-                    <button onClick={this.showContactInformation}> <ContactElement data={data}></ContactElement> </button>
+                    <button onClick={this.showContactInformation("5c95aa2ed50583140d581c4e")}> <ContactElement data={data}></ContactElement> </button>
+                    <button onClick={this.showContactInformation("5c97de1b2ce54f63ee5090ce")}> <ContactElement data={data}></ContactElement> </button>
+                    <button onClick={this.showContactInformation("5c97de362ce54f63ee5090cf")}> <ContactElement data={data}></ContactElement> </button>
+                    <button onClick={this.showContactInformation("5c97de042ce54f63ee5090cd")}> <ContactElement data={data}></ContactElement> </button>
+                    
                 </div>
                 <div>
                     <ContactInfo data={data}></ContactInfo>
